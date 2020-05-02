@@ -20,6 +20,7 @@ class BooksController < ApplicationController
   # POST /books
   # POST /books.json
   def create
+    @books = Book.all
     @book = Book.new(book_params)
     if @book.save
       redirect_to @book, notice: 'Book was successfully created.'
@@ -31,7 +32,7 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
   def update
-    if @book.update()
+    if @book.update(book_params)
       redirect_to @book, notice: 'Book was successfully updated.'
     else
       render :edit
@@ -56,3 +57,4 @@ class BooksController < ApplicationController
       params.require(:book).permit(:title, :body)
     end
 end
+
